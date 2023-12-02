@@ -17,7 +17,7 @@ def start():
     print("'A' or 'a' : Left")
     print("'D' or 'd' : Right")
 
-    # memasukkan angka 2 ke matriks dengan function
+    # memasukkan angka 3 ke matriks dengan function
     add_2(mat)
     return mat
 
