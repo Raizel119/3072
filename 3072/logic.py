@@ -1,14 +1,11 @@
 import random
 
+# awal game saat dijalankan
 def start():
+    # membuat matriks kosong dengan 4 baris dan kolom
     mat = []
-    matx = []
     for i in range(4):
-        matx.append(0)
-
-    for i in range(4): 
-        mat.append(matx)
-    
+        mat.append([0] * 4)
 
     # instruksi kontrol
     print("Key : ")
@@ -18,11 +15,11 @@ def start():
     print("'D' or 'd' : Right")
 
     # memasukkan angka 3 ke matriks dengan function
-    add_2(mat)
+    add_3(mat)
     return mat
 
 # menambah angka ke matriks
-def add_2(mat):
+def add_3(mat):
     # memilih angka dari 0 sampai 3 ke baris dan kolom
     b = random.randint(0, 3)
     k = random.randint(0, 3)
@@ -49,13 +46,35 @@ def state(mat):
             if(mat[i][j] == 0):
                 return "BELUM BERAKHIR"
     
-    # jika grid penuh, tapi terdapat angka yang bisa digabung disekitarnya
-    for i in range(4):
-        for j in range(4):
+    # jika grid penuh, tapi terdapat angka yg bisa digabung di kanan atau bawah
+    # pengecekan hanya sampai baris ke 3, jika lebih maka akan error karena saat
+    # baris index 4 ditambah, index 5 tidak terdapat dalam matriks (akan error)
+    for i in range(3):
+        for j in range(3):
             if(mat[i][j] == mat[i+1][j] or mat[i][j] == mat[i][j+1]):
                 return "BELUM BERAKHIR"
             
-    # 
+    # jika grid penuh, tapi terdapat angka yg bisa digabung di kanannya (baris 4)
+    for j in range(3):
+        if(mat[3][j] == mat[3][j+1]):
+            return "BELUM BERAKHIR"
+        
+    # jika grid penuh, tapi terdapat angka yg bisa digabung di bawahnya (kolom 4)
+    for i in range(3):
+        if(mat[i][3] == mat[i+1][3]):
+            return "BELUM BERAKHIR"
 
     return "KALAH"
     
+# kompress matriks untuk nanti nilainya di jumlahkan
+def compress(mat):
+    change = False
+
+# mengganti baris ke kolom matriks x di matriks baru
+def transpose(mat):
+    new = []
+    for i in range(4):
+        new.append([])
+        for j in range(4):
+            new[i].append(mat[j][i])
+    return new
