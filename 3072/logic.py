@@ -146,8 +146,12 @@ def left(game):
 def right(game):
     # balikkan angka kiri ke kanan
     game = reverse(game)
-    # gerakkan ke kiri
-    game, change = left(game)
+     # gerakkan grid ke kiri
+    game, change = shift(game)
+    # jumlahkan nilainya ke kiri
+    game, change = merge(game, change)
+    # kemudian gerakkan ke kiri lagi
+    game, change = shift(game)
     # balikkan kanan ke kiri
     game = reverse(game)
     return game, change
@@ -155,8 +159,12 @@ def right(game):
 def up(game):
     # mengganti kolom ke baris
     game = transpose(game)
-    # gerakkan ke kiri
-    game, change = left(game)
+     # gerakkan grid ke kiri
+    game, change = shift(game)
+    # jumlahkan nilainya ke kiri
+    game, change = merge(game, change)
+    # kemudian gerakkan ke kiri lagi
+    game, change = shift(game)
     # belikkan kolom ke baris
     game = transpose(game)
     return game, change
@@ -164,8 +172,12 @@ def up(game):
 def down(game):
     # mengganti kolom ke baris, lalu balikkan kiri ke kanan
     game = reverse(transpose(game))
-    # gerakkan ke kiri
-    game, change = left(game)
+     # gerakkan grid ke kiri
+    game, change = shift(game)
+    # jumlahkan nilainya ke kiri
+    game, change = merge(game, change)
+    # kemudian gerakkan ke kiri lagi
+    game, change = shift(game)
     # balikkan kanan ke kiri, lalu mengganti baris ke kolom
     game = transpose(reverse(game))
     return game, change
